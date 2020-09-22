@@ -23,7 +23,7 @@ function WeaponsDetail(props: any) {
       
         fetchWeapon();
         setLoading(false);
-    }, [])
+    }, [id])
 
     return (
         <div>
