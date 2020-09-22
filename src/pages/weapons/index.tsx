@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import firebase, { firebaseStore } from '../../interfaces/firebase'
 
 type Weapon = {
@@ -34,7 +35,9 @@ function WeaponsIndex() {
                 loading ? (<div>Loading...</div>) : (
                     <div>
                         {weapons.map((weapon) => (
-                            <li key={weapon.id}>{weapon.name}</li>
+                            <li key={weapon.id}>
+                                <Link to={`/weapons/${weapon.id}`}>{weapon.name}</Link>
+                            </li>
                         ))}
                     </div>
                 )
