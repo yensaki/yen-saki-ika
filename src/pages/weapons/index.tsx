@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import firebase, { firebaseStore } from '../../interfaces/firebase'
 
 type Weapon = {
     id: number,
@@ -6,17 +7,38 @@ type Weapon = {
 }
 
 function WeaponsIndex() {
-    const weapons: Weapon[] = [{id: 1, name: "わかばシューター"}]
+
+    const [loading, setLoading] = useState(true);
+    const [weapons, setWeapons] = useState<firebase.firestore.DocumentData[]>([]);
+    
+    useEffect(() => {
+        const searchWeapons = async() => {
+            const res = await firebaseStore.collection('weapons').get();
+            if (res.empty) return [];
+            const weaponsList: firebase.firestore.DocumentData[] = [];
+            res.forEach(doc => {
+                weaponsList.push(doc.data());
+            })
+            setWeapons(weaponsList);
+        }
+      
+        searchWeapons();
+        setLoading(false);
+    }, [])
 
     return (
         <div>
             <h1>Weapons index!!</h1>
 
-            <div>
-                {weapons.map((weapon) => (
-                    <li key={weapon.id}>{weapon.name}</li>
-                ))}
-            </div>
+            {
+                loading ? (<div>Loading...</div>) : (
+                    <div>
+                        {weapons.map((weapon) => (
+                            <li key={weapon.id}>{weapon.name}</li>
+                        ))}
+                    </div>
+                )
+            }
         </div>
     )
 }

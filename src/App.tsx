@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom'
 import RootIndex from './pages/index'
@@ -14,6 +13,7 @@ function App() {
         <Route exact path="/" component={RootIndex} />
         <Route exact path="/about" component={About} />
         <Route exact path="/weapons" component={WeaponsIndex} />
+        <Navbar />
       </div>
     </BrowserRouter>
   );
