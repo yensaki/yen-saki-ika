@@ -14,11 +14,6 @@ function App() {
         <Route exact path="/" component={RootIndex} />
         <Route exact path="/about" component={About} />
         <Route exact path="/weapons" component={WeaponsIndex} />
-
-        <header className="App-header">
-          <Navbar />
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
       </div>
     </BrowserRouter>
   );
