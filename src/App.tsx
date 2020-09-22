@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import RootIndex from './pages/index'
 import WeaponsIndex from './pages/weapons/index'
 import About from './pages/about'
+import Navbar from './components/navbar'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/weapons" component={WeaponsIndex} />
 
         <header className="App-header">
+          <Navbar />
           <img src={logo} className="App-logo" alt="logo" />
         </header>
       </div>

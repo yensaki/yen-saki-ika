@@ -5,7 +5,6 @@ function RootIndex() {
     return (
         <div>
             <h1>Welcome!</h1>
-            <Link to="/about">About</Link>
         </div>
     )
 }
