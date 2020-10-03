@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import firebase, { firebaseStore } from '../../interfaces/firebase'
 import {Weapon} from "../../interfaces/weapon";
+import {SubWeapon} from "../../interfaces/sub_weapon";
 
 function WeaponsDetail(props: any) {
     const [loading, setLoading] = useState(true);
@@ -12,8 +13,19 @@ function WeaponsDetail(props: any) {
             if (id) {
                 const res = await firebaseStore.collection("weapons").doc(id.toString()).get()
                 if (!res) return;
-                const weapon = res.data() as Weapon
-                setWeapon(weapon);
+                let weapon = res.data()
+                if (!weapon) { throw("error") }
+
+                const sub_res = await weapon.sub_weapon.get()
+                const sub_weapon =  sub_res.data() as SubWeapon
+                const result = {
+                    id: weapon.id,
+                    name: weapon.name,
+                    sub_weapon: sub_weapon
+                } as Weapon
+                console.log(result)
+
+                setWeapon(result);
             }
         }
       
@@ -31,6 +43,9 @@ function WeaponsDetail(props: any) {
                         <ul>
                             <li>id: {weapon.id}</li>
                             <li>name: {weapon.name}</li>
+                            {weapon.sub_weapon ? (
+                                <li>サブウェポン: {weapon.sub_weapon.name}</li>
+                            ) : ""}
                         </ul>
                     </div>
                 )
