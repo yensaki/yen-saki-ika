@@ -14,7 +14,7 @@ function WeaponsDetail(props: any) {
                 const res = await firebaseStore.collection("weapons").doc(id.toString()).get()
                 if (!res) return;
                 let weapon = res.data()
-                if (!weapon) { throw("error") }
+                if (!weapon) { return }
 
                 const sub_res = await weapon.sub_weapon.get()
                 const sub_weapon =  sub_res.data() as SubWeapon
@@ -23,7 +23,6 @@ function WeaponsDetail(props: any) {
                     name: weapon.name,
                     sub_weapon: sub_weapon
                 } as Weapon
-                console.log(result)
 
                 setWeapon(result);
             }
