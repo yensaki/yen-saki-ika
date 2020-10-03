@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import firebase, { firebaseStore } from '../../interfaces/firebase'
-
-type Weapon = {
-    id: number,
-    name: string
-}
+import {Weapon} from "../../interfaces/weapon";
 
 function WeaponsDetail(props: any) {
     const [loading, setLoading] = useState(true);
